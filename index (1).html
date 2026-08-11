@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Souryadeep Singha — Agentic AI & Data Science</title>
+<meta name="description" content="Portfolio of Souryadeep Singha, Data Scientist at IBM building agentic AI systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #FFFFFF;
+    --panel: #F6F7F9;
+    --panel-2: #EEF0F4;
+    --border: #E1E4EA;
+    --text: #12182A;
+    --muted: #5B6472;
+    --amber: #F2A93B;
+    --amber-dim: #D98A16;
+    --amber-ink: #9A5610;
+    --mint: #1E9E74;
+    --mint-dot: #2ECC96;
+    --term-bg: #0B1220;
+    --term-border: #223049;
+    --term-text: #E7ECF3;
+    --term-muted: #8C9AB3;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --maxw: 980px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--ink);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    background-image:
+      linear-gradient(rgba(18,24,42,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(18,24,42,0.035) 1px, transparent 1px);
+    background-size: 42px 42px;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  a{ color: var(--amber-ink); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 24px; position: relative; z-index:1; }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position: sticky; top:0; z-index: 10;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.82);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner{
+    max-width: var(--maxw); margin:0 auto; padding: 16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-id{
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  .nav-id b{ color: var(--text); font-weight: 600; }
+  .nav-links{ display:flex; gap: 24px; font-family: var(--mono); font-size: 13px; }
+  .nav-links a{ color: var(--muted); }
+  .nav-links a:hover{ color: var(--amber-ink); }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding: 72px 0 56px; }
+  .terminal{
+    background: var(--term-bg);
+    border: 1px solid var(--term-border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--mint-dot);
+    max-width: 560px;
+    box-shadow: 0 20px 40px -20px rgba(18,24,42,0.35);
+    min-height: 118px;
+  }
+  .terminal .dots{ display:flex; gap:6px; margin-bottom: 12px; }
+  .terminal .dots span{ width:9px; height:9px; border-radius:50%; background: var(--term-border); display:inline-block; }
+  .term-line{ color: var(--term-muted); }
+  .term-line .k{ color: var(--amber); }
+  .term-line .v{ color: var(--term-text); }
+  #term-cursor{ display:inline-block; width:7px; height:14px; background: var(--amber); vertical-align: -2px; animation: blink 1s step-end infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .hero-title{
+    margin: 34px 0 8px;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(34px, 5.2vw, 54px);
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+  .hero-title .accent{ color: var(--amber-ink); }
+  .hero-role{
+    font-family: var(--mono);
+    color: var(--muted);
+    font-size: 15px;
+    margin: 0 0 20px;
+  }
+  .hero-tagline{
+    max-width: 640px;
+    color: var(--text);
+    font-size: 17px;
+    margin: 0 0 28px;
+  }
+  .hero-cta{ display:flex; gap: 14px; flex-wrap: wrap; }
+  .btn{
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 11px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    display:inline-block;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .btn:hover{ border-color: var(--amber); text-decoration:none; transform: translateY(-1px); }
+  .btn.primary{ background: var(--amber); border-color: var(--amber); color: #1a1204; font-weight: 600; }
+  .btn.primary:hover{ background: #ffb84f; }
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{ padding: 64px 0; border-top: 1px solid var(--border); }
+  .eyebrow{
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em;
+    color: var(--amber-ink); text-transform: uppercase; margin: 0 0 10px;
+  }
+  h2.section-title{
+    font-size: 26px; margin: 0 0 28px; font-weight: 700; letter-spacing: -0.01em;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: start; }
+  .about-bio p{ color: var(--text); margin: 0 0 14px; font-size: 15.5px; }
+  .about-bio .lead{ color: var(--muted); }
+  .stack-panel{
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px;
+  }
+  .stack-panel .label{ font-family: var(--mono); font-size: 12px; color: var(--muted); margin-bottom: 12px; letter-spacing: .04em;}
+  .tag-cloud{ display:flex; flex-wrap: wrap; gap: 8px; }
+  .tag{
+    font-family: var(--mono); font-size: 12px; color: var(--text);
+    border: 1px solid var(--border); border-radius: 20px; padding: 5px 11px;
+    background: var(--panel-2);
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-group{ margin-bottom: 44px; }
+  .proj-group:last-child{ margin-bottom: 0; }
+  .proj-group-head{ display:flex; align-items:baseline; gap: 10px; margin-bottom: 16px; }
+  .proj-group-head h3{ font-size: 16px; margin:0; font-family: var(--mono); color: var(--text); font-weight:600; }
+  .proj-group-head .count{ font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  .card-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card{
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 20px; position: relative; overflow:hidden;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .card:hover{ border-color: var(--amber-dim); transform: translateY(-2px); }
+  .card::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:2px;
+    background: linear-gradient(90deg, var(--amber), transparent);
+    opacity: 0; transition: opacity .2s ease;
+  }
+  .card:hover::before{ opacity: 1; }
+  .card-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom: 10px; }
+  .status{ display:flex; align-items:center; gap:7px; font-family: var(--mono); font-size: 11px; color: var(--mint); letter-spacing: .04em; }
+  .status .dot{ width:7px; height:7px; border-radius:50%; background: var(--mint-dot); box-shadow: 0 0 6px var(--mint-dot); }
+  .card h4{ margin: 0 0 8px; font-size: 16.5px; }
+  .card p{ margin: 0 0 14px; color: var(--muted); font-size: 13.8px; }
+  .card-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom: 14px; }
+  .card-tags span{ font-family: var(--mono); font-size: 11px; color: var(--amber-ink); border:1px solid var(--border); border-radius: 4px; padding: 3px 7px; }
+  .card-link{ font-family: var(--mono); font-size: 12.5px; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-row{ display:flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+  .contact-card{
+    flex: 1 1 200px;
+    background: var(--panel); border:1px solid var(--border); border-radius: 8px;
+    padding: 18px; text-align:left;
+  }
+  .contact-card .k{ font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing:.06em; margin-bottom: 6px; }
+  .contact-card .v{ font-size: 15px; word-break: break-word; }
+
+  footer{
+    border-top: 1px solid var(--border); padding: 28px 0 50px;
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap: 8px;
+  }
+
+  @media (max-width: 720px){
+    .about-grid{ grid-template-columns: 1fr; }
+    .card-grid{ grid-template-columns: 1fr; }
+    .nav-links{ gap: 14px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    #term-cursor{ animation: none; }
+    .card, .btn{ transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-id"><b>Souryadeep Singha</b> · agent://portfolio</div>
+    <nav class="nav-links">
+      <a href="#about">about</a>
+      <a href="#projects">projects</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ---------- HERO ---------- -->
+  <section class="hero" style="border-top:none;">
+    <div class="terminal">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <div id="term-output"></div>
+    </div>
+
+    <h1 class="hero-title">Souryadeep <span class="accent">Singha</span></h1>
+    <p class="hero-role">Data Scientist @ IBM · 7 years · building agentic AI systems</p>
+    <p class="hero-tagline">
+      I spend most days turning messy data into decisions. Lately I've been teaching
+      systems to make some of those decisions on their own — agents that plan, reason,
+      and act instead of just predicting a number and stopping there.
+    </p>
+    <div class="hero-cta">
+      <a class="btn primary" href="#projects">View projects</a>
+      <a class="btn" href="#contact">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- ---------- ABOUT ---------- -->
+  <section id="about">
+    <p class="eyebrow">About</p>
+    <h2 class="section-title">A quick trace of the last 7 years</h2>
+    <div class="about-grid">
+      <div class="about-bio">
+        <p class="lead">
+          I'm a Data Scientist at IBM, where I've spent the last seven years
+          working across the usual data science stack — from cleaning raw
+          tables to shipping models that other teams actually rely on.
+        </p>
+        <p>
+          What keeps the job interesting is that the stack itself never sits
+          still. Right now that means going deep on agentic AI: systems built
+          from LLMs that can plan a task, call tools, check their own work,
+          and follow through — rather than models that just return an
+          answer and hand the rest back to a human.
+        </p>
+        <p>
+          This page is a mix of both worlds: a few classic predictive models
+          from earlier work, and a set of newer projects where the system
+          does more of the reasoning itself.
+        </p>
+      </div>
+      <div class="stack-panel">
+        <div class="label">// currently working with</div>
+        <div class="tag-cloud">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">LLM Agents</span>
+          <span class="tag">RAG</span>
+          <span class="tag">Vector DBs</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">Prompt Engineering</span>
+          <span class="tag">Tool Calling</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- PROJECTS ---------- -->
+  <section id="projects">
+    <p class="eyebrow">Projects</p>
+    <h2 class="section-title">Systems I've built</h2>
+
+    <div class="proj-group">
+      <div class="proj-group-head">
+        <h3>agentic systems</h3>
+        <span class="count">// systems that plan and act, not just predict</span>
+      </div>
+      <div class="card-grid">
+
+        <div class="card">
+          <div class="card-top">
+            <span class="status"><span class="dot"></span>ACTIVE</span>
+          </div>
+          <h4>Meal Planner Agent</h4>
+          <p>An agent that plans a full meal schedule from dietary constraints, preferences, and pantry inputs — reasoning through trade-offs instead of returning a static list.</p>
+          <div class="card-tags"><span>LLM Agent</span><span>Python</span><span>Planning</span></div>
+          <!-- Add your project/demo link below, e.g. href="https://github.com/yourname/meal-planner-agent" -->
+          <a class="card-link" href="#">View project ↗</a>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <span class="status"><span class="dot"></span>ACTIVE</span>
+          </div>
+          <h4>Text-to-SQL Agent</h4>
+          <p>Converts natural-language questions into schema-aware SQL, executes the query, and validates the result before handing it back — closing the loop instead of just generating a query string.</p>
+          <div class="card-tags"><span>LLM</span><span>SQL</span><span>Schema-aware</span></div>
+          <!-- Add your project/demo link below -->
+          <a class="card-link" href="#">View project ↗</a>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <span class="status"><span class="dot"></span>ACTIVE</span>
+          </div>
+          <h4>Chat with PDF</h4>
+          <p>A retrieval-augmented agent that reads long PDFs, chunks and embeds them, and holds a grounded conversation over the document — with citations back to source pages.</p>
+          <div class="card-tags"><span>RAG</span><span>Embeddings</span><span>Vector DB</span></div>
+          <!-- Add your project/demo link below -->
+          <a class="card-link" href="#">View project ↗</a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="proj-group">
+      <div class="proj-group-head">
+        <h3>predictive models</h3>
+        <span class="count">// classic ML, one number in, one answer out</span>
+      </div>
+      <div class="card-grid">
+
+        <div class="card">
+          <div class="card-top">
+            <span class="status"><span class="dot"></span>SHIPPED</span>
+          </div>
+          <h4>Car Price Predictor</h4>
+          <p>A regression model that estimates a fair market price for a used car from its specs, condition, and market data — the kind of grounded, single-answer model agentic systems still lean on.</p>
+          <div class="card-tags"><span>Regression</span><span>scikit-learn</span><span>Feature Engineering</span></div>
+          <!-- Add your project/demo link below -->
+          <a class="card-link" href="#">View project ↗</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- CONTACT ---------- -->
+  <section id="contact">
+    <p class="eyebrow">Contact</p>
+    <h2 class="section-title">Get in touch</h2>
+    <div class="contact-row">
+      <div class="contact-card">
+        <div class="k">EMAIL</div>
+        <!-- Replace with your real email -->
+        <div class="v"><a href="mailto:souryadeep.singha@example.com">souryadeep.singha@example.com</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="k">LINKEDIN</div>
+        <!-- Replace with your real LinkedIn URL -->
+        <div class="v"><a href="https://linkedin.com/in/souryadeep-singha" target="_blank" rel="noopener">linkedin.com/in/souryadeep-singha</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="k">GITHUB</div>
+        <!-- Replace with your real GitHub URL -->
+        <div class="v"><a href="https://github.com/souryadeep-singha" target="_blank" rel="noopener">github.com/souryadeep-singha</a></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div>© <span id="year"></span> Souryadeep Singha</div>
+  <div>built with plain HTML/CSS/JS</div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Terminal boot trace
+  const lines = [
+    { k: 'observe', v: 'profile loaded — 7y data science @ IBM' },
+    { k: 'think', v: 'show systems that reason, not just predict' },
+    { k: 'act', v: 'rendering agentic-systems dashboard...' },
+    { k: 'done', v: 'ready.' }
+  ];
+  const out = document.getElementById('term-output');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function renderStatic(){
+    out.innerHTML = lines.map(l =>
+      `<div class="term-line">&gt; <span class="k">${l.k}:</span> <span class="v">${l.v}</span></div>`
+    ).join('');
+  }
+
+  if (reduceMotion) {
+    renderStatic();
+  } else {
+    let li = 0, ci = 0;
+    const cursor = '<span id="term-cursor"></span>';
+
+    function typeLine(){
+      if (li >= lines.length) return;
+      const line = lines[li];
+      const prefix = `<div class="term-line">&gt; <span class="k">${line.k}:</span> <span class="v">`;
+      const full = line.v;
+
+      if (ci === 0) {
+        const done = lines.slice(0, li).map(l =>
+          `<div class="term-line">&gt; <span class="k">${l.k}:</span> <span class="v">${l.v}</span></div>`
+        ).join('');
+        out.innerHTML = done;
+      }
+
+      if (ci <= full.length) {
+        const done = lines.slice(0, li).map(l =>
+          `<div class="term-line">&gt; <span class="k">${l.k}:</span> <span class="v">${l.v}</span></div>`
+        ).join('');
+        out.innerHTML = done + prefix + full.slice(0, ci) + '</span>' + cursor + '</div>';
+        ci++;
+        setTimeout(typeLine, 22 + Math.random() * 30);
+      } else {
+        li++; ci = 0;
+        setTimeout(typeLine, 260);
+      }
+    }
+    typeLine();
+  }
+</script>
+
+</body>
+</html>
